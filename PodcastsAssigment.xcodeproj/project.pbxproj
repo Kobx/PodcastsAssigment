@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0A6B6002C5EF3C387FE54DB8 /* Pods_PodcastsAssigment_PodcastsAssigmentUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F768CBB23B5CB739A8C13D6 /* Pods_PodcastsAssigment_PodcastsAssigmentUITests.framework */; };
 		5511C594E6D9A76496634461 /* Pods_PodcastsAssigment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5930871B467FC36E4B7DCED2 /* Pods_PodcastsAssigment.framework */; };
+		6506BEFB2872F9C600E7CA64 /* ResultsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6506BEFA2872F9C600E7CA64 /* ResultsFetcher.swift */; };
+		6543012B2872E2D1008F9213 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6543012A2872E2D1008F9213 /* AppCoordinator.swift */; };
 		654CA7D62872C0C200F58F15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CA7D52872C0C200F58F15 /* AppDelegate.swift */; };
 		654CA7D82872C0C200F58F15 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CA7D72872C0C200F58F15 /* SceneDelegate.swift */; };
 		654CA7DA2872C0C200F58F15 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CA7D92872C0C200F58F15 /* MainViewController.swift */; };
@@ -45,6 +47,8 @@
 		16FB9E9A520C5EC7C8FEEE81 /* Pods-PodcastsAssigmentTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodcastsAssigmentTests.release.xcconfig"; path = "Target Support Files/Pods-PodcastsAssigmentTests/Pods-PodcastsAssigmentTests.release.xcconfig"; sourceTree = "<group>"; };
 		59188BACBD5C101A6C424A49 /* Pods-PodcastsAssigmentTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodcastsAssigmentTests.debug.xcconfig"; path = "Target Support Files/Pods-PodcastsAssigmentTests/Pods-PodcastsAssigmentTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5930871B467FC36E4B7DCED2 /* Pods_PodcastsAssigment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PodcastsAssigment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6506BEFA2872F9C600E7CA64 /* ResultsFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsFetcher.swift; sourceTree = "<group>"; };
+		6543012A2872E2D1008F9213 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		654CA7D22872C0C200F58F15 /* PodcastsAssigment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodcastsAssigment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		654CA7D52872C0C200F58F15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		654CA7D72872C0C200F58F15 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +101,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		654301292872E2B4008F9213 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				6543012A2872E2D1008F9213 /* AppCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		6543012D2872F8AB008F9213 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6506BEFA2872F9C600E7CA64 /* ResultsFetcher.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		654CA7C92872C0C200F58F15 = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +146,8 @@
 				65B625922872CA2400F4A71D /* Views */,
 				65B625902872C75A00F4A71D /* ViewModel */,
 				65B625912872C77700F4A71D /* Controllers */,
+				654301292872E2B4008F9213 /* Coordinator */,
+				6543012D2872F8AB008F9213 /* Network */,
 				654CA7D52872C0C200F58F15 /* AppDelegate.swift */,
 				654CA7D72872C0C200F58F15 /* SceneDelegate.swift */,
 				654CA7DB2872C0C200F58F15 /* Main.storyboard */,
@@ -457,10 +479,12 @@
 			files = (
 				654CA7DA2872C0C200F58F15 /* MainViewController.swift in Sources */,
 				65B625972872CB3A00F4A71D /* PodcastCellViewModel.swift in Sources */,
+				6506BEFB2872F9C600E7CA64 /* ResultsFetcher.swift in Sources */,
 				65B625992872CCAF00F4A71D /* Podcast.swift in Sources */,
 				654CA7D62872C0C200F58F15 /* AppDelegate.swift in Sources */,
 				65B625952872CA8100F4A71D /* PodscastCell.swift in Sources */,
 				654CA7D82872C0C200F58F15 /* SceneDelegate.swift in Sources */,
+				6543012B2872E2D1008F9213 /* AppCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,13 +18,15 @@ class PodcastCell : UITableViewCell {
     }
     
     func configureWith(_ viewModel: PodcastViewModelType){
+        
+        artistLabel.text = "dsadads"
         artistLabel.text = viewModel.artistName
         trackLabel.text = viewModel.trackName
         
         let placeholderImage = UIImage(named: "placeholder_podcast")
-        let imageURL = URL(fileURLWithPath: viewModel.logoURL)
+        let imageURL = viewModel.artworkUrl
         self.podcastImageView.sd_setImage(with: imageURL, placeholderImage:placeholderImage )
-        
+        contentView.backgroundColor = .yellow
     }
     
     
