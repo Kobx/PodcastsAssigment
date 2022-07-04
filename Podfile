@@ -8,6 +8,8 @@ target 'PodcastsAssigment' do
   # Pods for PodcastsAssigment
     pod 'RxSwift'
     pod 'RxCocoa'
+    pod 'SDWebImage', '~> 5.0'
+
   
 
   target 'PodcastsAssigmentTests' do

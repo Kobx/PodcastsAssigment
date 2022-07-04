@@ -52,15 +52,15 @@ extension Reactive where Base: UIButton {
 
     /// Reactive wrapper for `setImage(_:for:)`
     public func image(for controlState: UIControl.State = []) -> Binder<UIImage?> {
-        Binder(self.base) { button, image in
-            button.setImage(image, for: controlState)
+        Binder(self.base) { button, podcastImageView in
+            button.setImage(podcastImageView, for: controlState)
         }
     }
 
     /// Reactive wrapper for `setBackgroundImage(_:for:)`
     public func backgroundImage(for controlState: UIControl.State = []) -> Binder<UIImage?> {
-        Binder(self.base) { button, image in
-            button.setBackgroundImage(image, for: controlState)
+        Binder(self.base) { button, podcastImageView in
+            button.setBackgroundImage(podcastImageView, for: controlState)
         }
     }
     
