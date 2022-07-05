@@ -72,12 +72,11 @@
                                 </connections>
                             </tableViewCell>
                         </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="wL7-Aw-UsG" id="E5g-GA-X66"/>
-                            <outlet property="delegate" destination="wL7-Aw-UsG" id="jAC-HZ-OTd"/>
-                        </connections>
                     </tableView>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="searchBar" destination="UBJ-nT-n15" id="8eK-g6-BAH"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZJ8-qE-tnt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

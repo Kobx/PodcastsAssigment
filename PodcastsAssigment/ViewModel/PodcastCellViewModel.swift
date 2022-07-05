@@ -30,9 +30,7 @@ struct PodcastCellViewModel : PodcastViewModelType {
     }
     
     var artworkUrl: URL? {
-        //return a URL from the url string
-//        return URL.init(string: self.podcast.artworkUrl100)
-        return URL.init(string: "https://is5-ssl.mzstatic.com/image/thumb/Podcasts125/v4/ac/c4/c7/acc4c703-ae45-af83-5f51-ef4909ad6f3e/mza_13790432082240724320.jpg/100x100bb.jpg")
+        return URL.init(string: self.podcast.artworkUrl100)
     }
     
     

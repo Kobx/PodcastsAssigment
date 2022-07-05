@@ -15,8 +15,6 @@ class AppCoordinator {
         let navigationController = UINavigationController.init(rootViewController: mainVC)
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
-        
-        
     }
     
     

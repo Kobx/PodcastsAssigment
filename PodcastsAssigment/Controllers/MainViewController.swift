@@ -6,10 +6,18 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 
 class MainViewController: UITableViewController {
 
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    private let cellIdentifier = "PodcastCell"
+    private let apiClient = APIClient()
+    private let disposeBag = DisposeBag()
+    
     //MARK: LifeCycle
     
     static func instantiate() -> MainViewController {
@@ -21,34 +29,27 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let resultsFetcher = ResultsFetcher.init()
-        resultsFetcher.fetchPodcastsResults(forString: "geekonomy")
+        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationController?.navigationBar.prefersLargeTitles = true
+        tableView.dataSource = nil
+        tableView.delegate = nil
+        
+        configureReactiveBinding()
     }
 
-    
-//MARK: TableView DataSource
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PodcastCell", for: indexPath) as! PodcastCell
-        //TODO:configure viewModel
-//        cell.configureWith(viewModel)
-        
-//        let podcastModel = Podcast.init(artistName: "Koby Shirazi", trackName: "My home assigment", artworkUrl100: "https://is5-ssl.mzstatic.com/image/thumb/Podcasts125/v4/ac/c4/c7/acc4c703-ae45-af83-5f51-ef4909ad6f3e/mza_13790432082240724320.jpg/100x100bb.jpg")
-//        let cellViewModel = PodcastCellViewModel.init(podcastModel)
-//        cell.configureWith(cellViewModel)
-        
-        cell.backgroundColor = .red
-        return cell
+    private func configureReactiveBinding() {
+        self.searchBar.rx.text.asObservable()
+            .map { ($0 ?? "").lowercased() }
+            .map { PodcastsRequest(searchString: $0)}
+            .flatMapLatest { [unowned self] request -> Observable<[Podcast]> in
+                return self.apiClient.send(apiRequest: request)
+            }
+            .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier)) { index, model, cell in
+                if let cell = cell as? PodcastCell {
+                    cell.configureWith(PodcastCellViewModel.init(model))
+                }
+            }
+            .disposed(by: disposeBag)
     }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    
 }
 
