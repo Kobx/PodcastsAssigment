@@ -3,11 +3,6 @@ import RxSwift
 import RxCocoa
 
 
-struct PodcastResults: Codable {
-    let resultCount: Int
-    let results: [Podcast]
-}
-
 public enum RequestType: String {
     case GET, POST
 }
@@ -59,8 +54,16 @@ class APIClient {
         let request = apiRequest.request(with: baseURL)
         return URLSession.shared.rx.data(request: request)
             .map {
-                let podcastsArray = try JSONDecoder().decode(PodcastResults.self, from: $0).results
+                let podcastsArray = try self.newJSONDecoder().decode(PodcastResults.self, from: $0).results
                 return podcastsArray
             }
     }
+    
+    func newJSONDecoder() -> JSONDecoder {
+        let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+        return decoder
+    }
 }
+
+

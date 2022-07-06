@@ -9,16 +9,25 @@ import UIKit
 
 class AppCoordinator {
     private let window :UIWindow
+    private let navigationController: UINavigationController
     
-    func stat() {
-        let mainVC = MainViewController.instantiate()
-        let navigationController = UINavigationController.init(rootViewController: mainVC)
+    init(window: UIWindow) {
+        self.window = window
+        self.navigationController = UINavigationController()
+    }
+    
+    func loadRootVC() {
+        let rootVC = SearchPodcastsVC.instantiate()
+        navigationController.viewControllers = [rootVC]
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
     }
     
-    
-    init(window: UIWindow) {
-        self.window = window
+    func showPodcastDetailsVC(withViewModel viewModel:PodcastDetailsViewModel) {
+        let podcastDetailsVC = PodcastDetailsVC.instantiate()
+        podcastDetailsVC.viewModel = viewModel
+        navigationController.pushViewController(podcastDetailsVC, animated: true)
     }
+    
+
 }

@@ -17,7 +17,7 @@ class PodcastCell : UITableViewCell {
         
     }
     
-    func configureWith(_ viewModel: PodcastViewModelType){
+    func configureWith(_ viewModel: PodcastCellViewModelType){
         artistLabel.text = viewModel.artistName
         trackLabel.text = viewModel.trackName
         self.podcastImageView.sd_setImage(with: viewModel.artworkUrl, placeholderImage:UIImage(named: "placeholder_podcast"))

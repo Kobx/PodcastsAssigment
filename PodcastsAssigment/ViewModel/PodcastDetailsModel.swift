@@ -7,13 +7,14 @@
 
 import Foundation
 
-protocol PodcastCellViewModelType {
+protocol PodcastDetailsViewModelType {
     var artistName: String { get }
     var trackName: String { get }
     var artworkUrl: URL? { get }
+    var releaseDate: String { get }
 }
 
-struct PodcastCellViewModel : PodcastCellViewModelType {
+struct PodcastDetailsViewModel : PodcastDetailsViewModelType {
     private let podcast: Podcast
     
     init(_ podcast: Podcast) {
@@ -26,6 +27,11 @@ struct PodcastCellViewModel : PodcastCellViewModelType {
     
     var trackName: String {
         return podcast.trackName
+    }
+    var releaseDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        return dateFormatter.string(from: podcast.releaseDate)
     }
     
     var artworkUrl: URL? {
