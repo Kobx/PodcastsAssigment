@@ -17,6 +17,7 @@ class SearchPodcastsVC: UITableViewController, UISearchBarDelegate {
     private let apiClient = APIClient()
     private let disposeBag = DisposeBag()
     
+    
     //MARK: LifeCycle
     
     static func instantiate() -> SearchPodcastsVC {
@@ -30,6 +31,7 @@ class SearchPodcastsVC: UITableViewController, UISearchBarDelegate {
         navigationController?.navigationBar.prefersLargeTitles = true
         tableView.dataSource = nil
         tableView.delegate = nil
+        
         configureReactiveBinding()
     }
     
@@ -38,26 +40,26 @@ class SearchPodcastsVC: UITableViewController, UISearchBarDelegate {
     private func configureReactiveBinding() {
         self.searchBar.rx.text.asObservable()
             .map { ($0 ?? "").lowercased() }
-            .map { PodcastsRequest(searchString: $0)}
+            .map { PodcastsRequest(searchString: $0)} //create request object for our search string
+            .debounce(.milliseconds(400), scheduler: MainScheduler.instance) //limit api calls on typing
             .flatMapLatest { [unowned self] request -> Observable<[Podcast]> in
-                return self.apiClient.send(apiRequest: request)
-            }
+                return self.apiClient.send(apiRequest: request) //run the API call
+            } //bind to tableView
             .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier)) { index, model, cell in
                 if let cell = cell as? PodcastCell {
-                    cell.configureWith(PodcastCellViewModel.init(model))
+                    cell.configureWith(PodcastCellViewModel.init(model)) //configure cell with our ViewModel
                 }
             }
-            .disposed(by: disposeBag)
+            .disposed(by: disposeBag) //memory managment
         
+        //On cell selection we show present the details screen by using our AppCoordinator
         tableView.rx.modelSelected(Podcast.self)
-            .map { PodcastDetailsViewModel.init($0) }
+            .map { PodcastDetailsViewModel.init($0) } //transform to a ViewModel
             .subscribe(onNext: {
                 self.tableView.deselectRow(at: self.tableView.indexPathForSelectedRow!, animated: true)
-                let appCoordinator = Utils.getCoordinator()
-                appCoordinator?.showPodcastDetailsVC(withViewModel: $0)
+                Utils.getCoordinator()?.showPodcastDetailsVC(withViewModel: $0)
             })
-            .disposed(by: disposeBag)
-        
+            .disposed(by: disposeBag) //memory managment
     }
     
     //MARK: SearchBar Delegate

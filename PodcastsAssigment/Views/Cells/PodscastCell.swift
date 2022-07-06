@@ -21,7 +21,6 @@ class PodcastCell : UITableViewCell {
         artistLabel.text = viewModel.artistName
         trackLabel.text = viewModel.trackName
         self.podcastImageView.sd_setImage(with: viewModel.artworkUrl, placeholderImage:UIImage(named: "placeholder_podcast"))
-        
         layoutIfNeeded()
     }
     

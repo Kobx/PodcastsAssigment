@@ -14,6 +14,9 @@ class PodcastDetailsVC: UIViewController {
     @IBOutlet weak var releaseDateLabel: UILabel!
     public var viewModel: PodcastDetailsViewModel?
     
+    
+    //MARK: Lifecycle
+    
     static func instantiate() -> PodcastDetailsVC {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         return storyboard.instantiateViewController(withIdentifier: "PodcastDetailsVC") as! PodcastDetailsVC
@@ -21,15 +24,21 @@ class PodcastDetailsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+        configureViews()
+    }
+    
+    //MARK: UI
+    
+    func configureViews() {
         guard let viewModel = self.viewModel else {
             return
         }
-        
         self.podcastImageView.sd_setImage(with: viewModel.artworkUrl)
         self.artistLabel.text = viewModel.artistName
         self.trackLabel.text = viewModel.trackName
         self.releaseDateLabel.text = viewModel.releaseDate
-        
     }
     
     
